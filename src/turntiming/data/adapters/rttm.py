@@ -7,8 +7,8 @@ Field order is the standard one::
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 from turntiming.data.schema import SpeakerSegment
 

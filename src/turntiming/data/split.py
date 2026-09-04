@@ -10,7 +10,7 @@ by recognising a voice or a microphone rather than by reading timing.
 
 from __future__ import annotations
 
-from typing import Hashable, Sequence
+from collections.abc import Hashable, Sequence
 
 import numpy as np
 
@@ -44,7 +44,7 @@ def group_split(
 
     rng = np.random.default_rng(seed)
     shuffled = list(rng.permutation(np.array(unique, dtype=object)))
-    target = max(1, int(round(len(keys) * val_fraction)))
+    target = max(1, round(len(keys) * val_fraction))
 
     counts: dict[str, int] = {}
     for key in keys:

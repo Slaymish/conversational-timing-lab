@@ -105,7 +105,7 @@ class AudioWindowDataset(Dataset):
                 self._resamplers[rate] = torchaudio.transforms.Resample(rate, self.sample_rate)
             waveform = self._resamplers[rate](waveform)
 
-        target = int(round(self.window_seconds * self.sample_rate))
+        target = round(self.window_seconds * self.sample_rate)
         if waveform.numel() < target:
             waveform = torch.nn.functional.pad(waveform, (target - waveform.numel(), 0))
         return waveform[-target:]

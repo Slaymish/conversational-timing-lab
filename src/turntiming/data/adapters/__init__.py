@@ -8,7 +8,7 @@ adding one function here.
 
 from __future__ import annotations
 
-from typing import Callable, Iterator
+from collections.abc import Callable, Iterator
 
 from turntiming.data.adapters import ami, rttm, segments_jsonl
 from turntiming.data.schema import SpeakerSegment
@@ -26,4 +26,4 @@ def load_segments(kind: str, path: str, **kwargs) -> Iterator[SpeakerSegment]:
     return ADAPTERS[kind](path, **kwargs)
 
 
-__all__ = ["ADAPTERS", "load_segments", "ami", "rttm", "segments_jsonl"]
+__all__ = ["ADAPTERS", "ami", "load_segments", "rttm", "segments_jsonl"]

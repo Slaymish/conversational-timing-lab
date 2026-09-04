@@ -17,9 +17,10 @@ reports, where they are easier to read.
 from __future__ import annotations
 
 import json
+from collections.abc import Iterable, Iterator
 from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
-from typing import Any, Iterable, Iterator
+from typing import Any
 
 
 @dataclass(frozen=True)

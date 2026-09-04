@@ -18,8 +18,8 @@ from __future__ import annotations
 
 import re
 from collections import Counter, defaultdict
+from collections.abc import Iterable, Iterator, Sequence
 from dataclasses import dataclass, field
-from typing import Iterable, Iterator, Sequence
 
 from turntiming.data.schema import SpeakerSegment, TimingExample
 

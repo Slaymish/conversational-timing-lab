@@ -8,8 +8,8 @@ One JSON object per line::
 from __future__ import annotations
 
 import json
+from collections.abc import Iterator
 from pathlib import Path
-from typing import Iterator
 
 from turntiming.data.schema import SpeakerSegment
 
