@@ -1,0 +1,10 @@
+seed: 42
+sample_rate: 16000
+window_seconds: 2.0
+n_mels: 64
+hidden_size: 96
+batch_size: 32
+learning_rate: 0.001
+epochs: 10
+turn_end_loss_weight: 1.0
+onset_loss_weight: 0.25
