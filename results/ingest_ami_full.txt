@@ -1,0 +1,14 @@
+# scripts/ingest.py --adapter ami --source data/raw/ami/ami_public_manual_1.6.2 --out data/ami_all.jsonl
+# all 171 AMI meetings, annotations only (no audio needed)
+# commit e46e7a1
+
+conversations=171  with audio=0  segments=991536
+wrote 100004 examples -> data/ami_all.jsonl
+  turn_end rate     0.561  (56111 shift / 43893 hold)
+  backchannels      4487
+  censored onsets   17832
+  boundary accounting: {"boundaries": 92115, "examples": 100004, "examples_offset_0.1": 32119, "examples_offset_0.3": 27668, "examples_offset_0.5": 23591, "examples_offset_1.0": 16626, "skipped_conversation_end": 167, "skipped_resolved_immediately": 1894, "skipped_short_ipu": 2989, "skipped_talked_over": 54946}
+    offset 0.10s  n=32119  turn_end_rate=0.629
+    offset 0.30s  n=27668  turn_end_rate=0.583
+    offset 0.50s  n=23591  turn_end_rate=0.537
+    offset 1.00s  n=16626  turn_end_rate=0.427

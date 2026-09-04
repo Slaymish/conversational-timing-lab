@@ -58,7 +58,7 @@ A useful application metric is **release timing error** after subtracting the me
 
 Three baselines: majority class, a fitted pause threshold, and a pause→turn-end-rate lookup table. The threshold fits **both directions** and is fitted on Youden's J rather than F1, because with an unbalanced base rate F1 is maximised by predicting the majority class everywhere, and a baseline that silently degenerates proves nothing.
 
-**Result on all 171 AMI meetings (100,004 boundaries, conversation-level split):**
+**Result on all 171 AMI meetings (100,004 boundaries, conversation-level split)** — verbatim output in [`results/e0_ami_full.txt`](../results/e0_ami_full.txt):
 
 | model | accuracy | P | R | F1 | FIR |
 | --- | --- | --- | --- | --- | --- |
@@ -82,6 +82,12 @@ Two consequences worth carrying into E1:
 ### E1 — small audio model
 
 Train the GRU baseline from scratch on 1–3 seconds of log-mel context.
+
+The audio path is wired and verified end to end on real AMI wavs
+([`results/e1_ami_3meetings.txt`](../results/e1_ami_3meetings.txt)), but that run
+has 643 training examples and one validation conversation, and lands below the
+majority class. It is a pipeline check, not a result. E1 proper needs audio for
+many more meetings.
 
 Splits are by conversation (`split_by: conversation`), so the model cannot score well by recognising a voice or a room. The synthetic config splits by boundary instead, since it has few conversations.
 

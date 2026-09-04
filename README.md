@@ -135,7 +135,17 @@ So `turntiming.eval.metrics` reports precision, recall and F1, plus:
 
 Every training run prints E0 on the same validation split, because a timing model that cannot beat "wait for silence" has not earned its parameters.
 
-See [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) for the research plan.
+See [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) for the research plan, and [`results/`](results/) for verbatim run output.
+
+### What E0 found
+
+On all 171 AMI meetings (100,004 boundaries, conversation-level split), the pause-duration baseline learns this:
+
+```
+P(turn ended | silence so far):  100ms -> 0.633   300ms -> 0.589   500ms -> 0.543   1000ms -> 0.435
+```
+
+It runs **backwards**. The longer the silence has lasted, the *less* likely the speaker was finished — a speaker thinking mid-turn out-waits a partner simply taking their next turn. The best pause-only model beats the majority class by 3.5 accuracy points, and none of them can hit a 5% interruption budget at any threshold. That is the bar E1 has to clear. Full numbers in [`results/`](results/README.md).
 
 ## Research question
 

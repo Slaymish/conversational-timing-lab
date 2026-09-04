@@ -1,0 +1,28 @@
+# python -m turntiming.baselines.pause --data data/ami_all.jsonl
+# E0 on all 171 AMI meetings, 100,004 boundaries, conversation-level split
+# commit e46e7a1
+
+examples=100004  train=79704  val=20300  split_by=conversation
+turn_end base rate=0.561  censored onsets=17832
+
+E0a majority class (always 1)
+  turn-end @0.50      n=20300  acc=0.538 P=0.538 R=1.000 F1=0.700 FIR=1.000
+  turn-end @FIR<=5%   n=20300  acc=0.462 P=0.000 R=0.000 F1=0.000 FIR=0.000  (threshold=1.000)
+
+E0b pause threshold (shorter than 300ms) + constant onset (1360ms)
+  turn-end @0.50      n=20300  acc=0.567 P=0.588 R=0.651 F1=0.618 FIR=0.531
+  turn-end @FIR<=5%   n=20300  acc=0.462 P=0.000 R=0.000 F1=0.000 FIR=0.000  (threshold=1.000)
+    offset 0.10s      n=6482   acc=0.611 P=0.611 R=1.000 F1=0.758 FIR=1.000 base_rate=0.611
+    offset 0.30s      n=5606   acc=0.562 P=0.562 R=1.000 F1=0.720 FIR=1.000 base_rate=0.562
+    offset 0.50s      n=4812   acc=0.487 P=0.000 R=0.000 F1=0.000 FIR=0.000 base_rate=0.513
+    offset 1.00s      n=3400   acc=0.603 P=0.000 R=0.000 F1=0.000 FIR=0.000 base_rate=0.397
+  response onset      n=16412  MAE=1700.0ms median= 860.0ms  interruptive=0.46 natural=0.11 slightly_late=0.15 sluggish=0.28
+
+E0c pause -> turn-end rate lookup
+  turn-end @0.50      n=20300  acc=0.573 P=0.567 R=0.877 F1=0.688 FIR=0.781
+  turn-end @FIR<=5%   n=20300  acc=0.462 P=0.000 R=0.000 F1=0.000 FIR=0.000  (threshold=1.000)
+    offset 0.10s      n=6482   acc=0.611 P=0.611 R=1.000 F1=0.758 FIR=1.000 base_rate=0.611
+    offset 0.30s      n=5606   acc=0.562 P=0.562 R=1.000 F1=0.720 FIR=1.000 base_rate=0.562
+    offset 0.50s      n=4812   acc=0.513 P=0.513 R=1.000 F1=0.678 FIR=1.000 base_rate=0.513
+    offset 1.00s      n=3400   acc=0.603 P=0.000 R=0.000 F1=0.000 FIR=0.000 base_rate=0.397
+  P(turn ended | silence so far):  100ms -> 0.633  300ms -> 0.589  500ms -> 0.543  1000ms -> 0.435

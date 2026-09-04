@@ -1,0 +1,40 @@
+# python -m turntiming.train --config configs/ami.yaml --data data/ami.jsonl
+# PIPELINE CHECK ONLY -- 3 AMI meetings, 643 training examples, 1 validation
+# conversation. Not a meaningful E1 result; see results/README.md.
+# commit e46e7a1
+
+split_by=conversation train=643 val=489 params=107,330
+epoch=1  turn-end @0.50      n=489    acc=0.517 P=0.465 R=0.829 F1=0.596 FIR=0.717
+epoch=2  turn-end @0.50      n=489    acc=0.454 P=0.437 R=0.948 F1=0.598 FIR=0.918
+epoch=3  turn-end @0.50      n=489    acc=0.521 P=0.463 R=0.714 F1=0.562 FIR=0.624
+epoch=4  turn-end @0.50      n=489    acc=0.513 P=0.451 R=0.614 F1=0.520 FIR=0.563
+epoch=5  turn-end @0.50      n=489    acc=0.495 P=0.453 R=0.857 F1=0.593 FIR=0.778
+epoch=6  turn-end @0.50      n=489    acc=0.497 P=0.454 R=0.843 F1=0.590 FIR=0.763
+epoch=7  turn-end @0.50      n=489    acc=0.524 P=0.467 R=0.786 F1=0.586 FIR=0.674
+epoch=8  turn-end @0.50      n=489    acc=0.495 P=0.454 R=0.862 F1=0.594 FIR=0.781
+epoch=9  turn-end @0.50      n=489    acc=0.505 P=0.458 R=0.833 F1=0.591 FIR=0.742
+epoch=10 turn-end @0.50      n=489    acc=0.536 P=0.450 R=0.362 F1=0.401 FIR=0.333
+epoch=11 turn-end @0.50      n=489    acc=0.546 P=0.463 R=0.362 F1=0.406 FIR=0.315
+epoch=12 turn-end @0.50      n=489    acc=0.454 P=0.436 R=0.924 F1=0.592 FIR=0.900
+epoch=13 turn-end @0.50      n=489    acc=0.544 P=0.479 R=0.690 F1=0.565 FIR=0.566
+epoch=14 turn-end @0.50      n=489    acc=0.497 P=0.452 R=0.800 F1=0.577 FIR=0.731
+epoch=15 turn-end @0.50      n=489    acc=0.552 P=0.442 R=0.162 F1=0.237 FIR=0.154
+
+==============================================================================
+E0 baseline  pause shorter than 300ms, onset always 1862ms
+  turn-end @0.50      n=489    acc=0.569 P=0.497 R=0.386 F1=0.434 FIR=0.294
+  turn-end @FIR<=5%   n=489    acc=0.571 P=0.000 R=0.000 F1=0.000 FIR=0.000  (threshold=1.000)
+    offset 0.10s      n=163    acc=0.497 P=0.497 R=1.000 F1=0.664 FIR=1.000 base_rate=0.497
+    offset 0.30s      n=136    acc=0.574 P=0.000 R=0.000 F1=0.000 FIR=0.000 base_rate=0.426
+    offset 0.50s      n=109    acc=0.596 P=0.000 R=0.000 F1=0.000 FIR=0.000 base_rate=0.404
+    offset 1.00s      n=81     acc=0.667 P=0.000 R=0.000 F1=0.000 FIR=0.000 base_rate=0.333
+  response onset      n=352    MAE=1895.6ms median=1242.0ms  interruptive=0.39 natural=0.01 slightly_late=0.06 sluggish=0.54
+
+E1 joint audio model
+  turn-end @0.50      n=489    acc=0.552 P=0.442 R=0.162 F1=0.237 FIR=0.154
+  turn-end @FIR<=5%   n=489    acc=0.558 P=0.312 R=0.024 F1=0.044 FIR=0.039  (threshold=0.609)
+    offset 0.10s      n=163    acc=0.509 P=0.514 R=0.222 F1=0.310 FIR=0.207 base_rate=0.497
+    offset 0.30s      n=136    acc=0.574 P=0.500 R=0.207 F1=0.293 FIR=0.154 base_rate=0.426
+    offset 0.50s      n=109    acc=0.541 P=0.250 R=0.068 F1=0.107 FIR=0.138 base_rate=0.404
+    offset 1.00s      n=81     acc=0.617 P=0.167 R=0.037 F1=0.061 FIR=0.093 base_rate=0.333
+  response onset      n=352    MAE=1966.6ms median=1480.8ms  interruptive=0.32 natural=0.06 slightly_late=0.11 sluggish=0.51
