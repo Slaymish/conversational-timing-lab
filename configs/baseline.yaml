@@ -1,3 +1,4 @@
+# Synthetic pipeline check. Inline features, so no audio settings are used.
 seed: 42
 sample_rate: 16000
 window_seconds: 2.0
@@ -6,5 +7,8 @@ hidden_size: 96
 batch_size: 32
 learning_rate: 0.001
 epochs: 10
+val_fraction: 0.2
 turn_end_loss_weight: 1.0
 onset_loss_weight: 0.25
+max_false_interruption_rate: 0.05
+split_by: boundary  # synthetic has few conversations; keep rows from one boundary together

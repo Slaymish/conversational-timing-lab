@@ -5,7 +5,13 @@ from torch import nn
 
 
 class JointTimingModel(nn.Module):
-    """Shared from-scratch audio encoder with turn-end and response-onset heads."""
+    """Shared from-scratch audio encoder with turn-end and response-onset heads.
+
+    The onset head predicts **seconds**, not milliseconds. Softplus keeps it
+    non-negative, and working in seconds keeps the target on the same scale as
+    the classification loss, so the two heads no longer need a magic divisor to
+    stop the regression from swamping training.
+    """
 
     def __init__(self, n_mels: int = 64, hidden_size: int = 96) -> None:
         super().__init__()
@@ -30,5 +36,5 @@ class JointTimingModel(nn.Module):
         state = encoded[:, -1]
         return {
             "turn_end_logit": self.turn_end_head(state).squeeze(-1),
-            "onset_delay_ms": self.onset_head(state).squeeze(-1),
+            "onset_delay_s": self.onset_head(state).squeeze(-1),
         }
